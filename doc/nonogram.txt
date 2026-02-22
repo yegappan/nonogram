@@ -1,0 +1,129 @@
+*nonogram* *nonogram-vim*
+
+Nonogram - Vim9 popup nonogram game
+
+CONTENTS                                                   *nonogram-contents*
+  1. Overview..............................|nonogram-overview|
+  2. Commands..............................|nonogram-commands|
+  3. Controls..............................|nonogram-controls|
+  4. Options...............................|nonogram-options|
+  5. Puzzle Files..........................|nonogram-puzzles|
+  6. Glyph Data Files......................|nonogram-glyphs|
+  7. Notes.................................|nonogram-notes|
+
+==============================================================================
+1. Overview                                                  *nonogram-overview*
+
+Nonogram is a Vim9script nonogram game that runs in a popup window. It is
+built to showcase modern Vim9 features (classes, interfaces, enums, and strict
+typing). This plugin targets Vim only (not Neovim).
+
+Start the game with |:Nonogram|. You will be prompted to choose a grid
+size (5x5, 7x7, or 10x10). A puzzle is selected at random unless you override
+it with |g:nonogram_puzzle_index|.
+
+==============================================================================
+2. Commands                                                  *nonogram-commands*
+
+:Nonogram                                                    *:Nonogram*
+    Start the nonogram popup game.
+
+==============================================================================
+3. Controls                                                  *nonogram-controls*
+
+Movement:
+  h j k l          Move left/down/up/right
+  Arrow keys       Move cursor
+
+Actions:
+  <Space>          Fill cell
+  x                Mark cell
+  r                Reset puzzle
+  q                Quit
+
+Jump keys (optional):
+  0 / $            Row start / row end
+  Home / End       Row start / row end
+  H / L            Column top / bottom
+  PageUp / PageDown Column top / bottom
+
+==============================================================================
+4. Options                                                   *nonogram-options*
+
+g:nonogram_default_size
+    Default puzzle size (5, 7, or 10).
+
+g:nonogram_generated_count
+    How many generated letter puzzles to create.
+
+g:nonogram_puzzle_index
+    Force a specific puzzle index when multiple puzzles are available.
+
+g:nonogram_puzzle_file
+    Path to a JSON file containing puzzles. If set, the game loads puzzles from
+    this file instead of the built-in generated letter puzzles.
+
+==============================================================================
+5. Puzzle Files                                               *nonogram-puzzles*
+
+If |g:nonogram_puzzle_file| is set, the game loads puzzles from JSON. The file
+may contain a single object or a list of objects.
+
+Single puzzle:
+  {
+    "name": "MyPuzzle",
+    "solution": [
+      ".#.#.",
+      "#####",
+      "#####",
+      ".###.",
+      "..#.."
+    ]
+  }
+
+Multiple puzzles:
+  [
+    {
+      "name": "A",
+      "solution": [
+        ".#.#.",
+        "#####",
+        "#####",
+        ".###.",
+        "..#.."
+      ]
+    },
+    {
+      "name": "B",
+      "solution": [
+        "#####",
+        "#...#",
+        "#####",
+        "#...#",
+        "#####"
+      ]
+    }
+  ]
+
+Rules:
+  - solution must be a square grid (5x5, 7x7, or 10x10)
+  - only '#' and '.' are allowed in solution rows
+
+==============================================================================
+6. Glyph Data Files                                           *nonogram-glyphs*
+
+The built-in letter puzzles are loaded from JSON glyph files:
+  autoload/nonogram/glyphs5.json
+  autoload/nonogram/glyphs7.json
+
+These files use the same puzzle JSON format as above. Each entry uses a
+single-character name (A-Z and Greek uppercase).
+
+==============================================================================
+7. Notes                                                     *nonogram-notes*
+
+- The solved symbol is revealed only after completion.
+- The popup title shows the grid size.
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:
