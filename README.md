@@ -12,21 +12,88 @@ A Vim9script nonogram game that runs in a popup window. It is designed to showca
 ## Requirements
 - Vim 9.0+ with `popup` and `textprop` support
 
-## Install
-Use any Vim plugin manager, or clone into your runtime path.
+## Installation
 
-Example (pack):
+### Using Git
+If you have git installed, run the following command in your terminal:
+
+**Unix/Linux/macOS:**
+
 ```bash
-git clone https://github.com/yegappan/nonogram $HOME/.vim/pack/downloads/opt/nonogram
-vim -u NONE -c "helptags $HOME/.vim/pack/downloads/opt/nonogram/doc" -c q
+git clone https://github.com/yegappan/nonogram.git ~/.vim/pack/downloads/opt/nonogram
+```
+**Windows (cmd.exe):**
+
+```cmd
+git clone https://github.com/yegappan/nonogram.git %USERPROFILE%\vimfiles\pack\downloads\opt\nonogram
 ```
 
-After installing the plugin using the above steps, add the following line to
-your $HOME/.vimrc file:
+### Using a ZIP file
+If you prefer not to use Git:
+
+**Unix/Linux/macOS:**
+
+Create the destination directory:
+
+```bash
+mkdir -p ~/.vim/pack/downloads/opt/
+```
+
+Download the plugin ZIP file from GitHub and extract its contents into the directory created above.
+
+*Note:* GitHub usually names the extracted folder nonogram-main. Rename it to nonogram so the final path looks like this:
+
+```plaintext
+~/.vim/pack/downloads/opt/nonogram/
+├── plugin/
+├── autoload/
+└── doc/
+```
+
+**Windows (cmd.exe):**
+
+Create the destination directory:
+
+```cmd
+if not exist "%USERPROFILE%\vimfiles\pack\downloads\opt" mkdir "%USERPROFILE%\vimfiles\pack\downloads\opt"
+```
+
+Download the plugin ZIP file from GitHub and extract its contents into that directory.
+
+*Note:* Rename the extracted folder (usually nonogram-main) to nonogram so the path matches:
+
+```plaintext
+%USERPROFILE%\vimfiles\pack\downloads\opt\nonogram\
+├── plugin/
+├── autoload/
+└── doc/
+```
+
+**Finalizing Setup**
+Since this plugin is installed in the opt (optional) directory, it will not load automatically. Add the following line to your .vimrc (Unix) or _vimrc (Windows):
 
 ```viml
 packadd nonogram
 ```
+
+After adding the line, restart Vim and run the following command to enable the help documentation:
+
+```viml
+:helptags ALL
+```
+
+### Plugin Manager Installation
+
+If using a plugin manager like vim-plug, add to your .vimrc or init.vim:
+
+   ```viml
+   Plug 'path/to/nonogram'
+   ```
+
+Then run `:PlugInstall` and `:helptags ALL`
+
+For other plugin managers (Vundle, Pathogen, etc.), follow their standard
+installation procedures for local plugins.
 
 ## Usage
 Start the game:
